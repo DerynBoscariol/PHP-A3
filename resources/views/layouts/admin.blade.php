@@ -25,6 +25,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/actors">Actors</a> 
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/films">Films</a> 
+                            </li>
                         </ul> 
                     </div>
                 </div>

@@ -6,6 +6,10 @@ use App\Http\Requests\StoreFilmRequest;
 use App\Http\Requests\UpdateFilmRequest;
 use App\Models\Film;
 
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 class FilmController extends Controller
 {
     /**
@@ -13,7 +17,8 @@ class FilmController extends Controller
      */
     public function index()
     {
-        //
+        return view('films.index', [ 'films' => Film::all()
+    ]);
     }
 
     /**
@@ -21,7 +26,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-        //
+        return view('films.create');
     }
 
     /**
@@ -29,7 +34,10 @@ class FilmController extends Controller
      */
     public function store(StoreFilmRequest $request)
     {
-        //
+        Film::create($request->validated());
+
+        Session::flash('success', "Film added successfully!");
+        return redirect() -> route('films.index');
     }
 
     /**
@@ -37,7 +45,7 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
-        //
+        return view('films.show', compact('film'));
     }
 
     /**
@@ -45,7 +53,7 @@ class FilmController extends Controller
      */
     public function edit(Film $film)
     {
-        //
+        return view('films.edit', compact('film'));
     }
 
     /**
@@ -53,14 +61,41 @@ class FilmController extends Controller
      */
     public function update(UpdateFilmRequest $request, Film $film)
     {
-        //
+        $film->update($request->validated());
+
+        Session::flash('success', 'Film updated successfully!');
+        return redirect() -> route('films.index');
+    }
+
+   /**
+     * Move the specified resource to trashed.
+     */
+    public function trash($id)
+    {
+        Film::Destroy($id);
+        Session::flash('success', 'Film trashed successfully!');
+        return redirect() -> route('films.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage permanently.
      */
-    public function destroy(Film $film)
+    public function destroy($id)
     {
-        //
+        $film = Film::withTrashed() -> where('id', $id) -> first();
+        $film -> forceDelete();
+        Session::Flash('success', 'Film deleted successfully!');
+        return redirect() -> route('films.index');
     }
+
+    /**
+     * Restore the specified resource from trash.
+     */
+     public function restore($id)
+     {
+        $film = Film::withTrashed() -> where('id', $id) -> first();
+        $film ->restore();
+        Session::Flash('success', 'Film restored successfully');
+        return redirect() -> route('films.trashed');
+     }
 }

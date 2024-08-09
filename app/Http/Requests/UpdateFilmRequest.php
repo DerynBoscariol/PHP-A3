@@ -22,7 +22,9 @@ class UpdateFilmRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string',
+            'year' => 'required|integer',
+            'genre' => 'required|string',
         ];
     }
 }
