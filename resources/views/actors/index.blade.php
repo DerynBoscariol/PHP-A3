@@ -6,6 +6,11 @@
                 All Actors
             </h1>
         </div>
+        <div class="col">
+            <h3>
+                <a href="{{ route('actors.create') }}">Add a New Actor</a>
+            </h3>
+        </div>
     </div>
     <div class="row">
         @foreach($actors as $actor)
@@ -15,7 +20,7 @@
                     <h5 class="card-title">
                         {{$actor -> fname}} {{$actor -> lname}}
                     </h5>
-                    <p>From: {{ $actor-> country }}</p>
+                    <a href="{{ route('actors.show', $actor -> id) }}" class="card-link">See more</a>
                     <a href="{{ route('actors.edit', $actor -> id) }}" class="card-link">Edit</a>
                     <a href="{{ route('actors.trash', $actor -> id) }}" class="card-link">Delete</a>
                 </div>
