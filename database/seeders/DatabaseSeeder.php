@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use App\Models\Actor;
 use App\Models\User;
+use App\Models\Film;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -48,6 +49,36 @@ class DatabaseSeeder extends Seeder
             'fname' => 'Emma',
             'lname' => 'Stone',
             'country' => 'United States',
+        ]);
+
+        Film::factory()->create([
+            'title' => 'La La Land',
+            'year' => 2016,
+            'genre' => 'Musical'
+        ]);
+
+        Film::factory()->create([
+            'title' => 'Barbie',
+            'year' => 2023,
+            'genre' => 'Comedy'
+        ]);
+
+        Film::factory()->create([
+            'title' => 'Wolf of Wall Street',
+            'year' => 2013,
+            'genre' => 'Comedy'
+        ]);
+
+        Film::factory()->create([
+            'title' => 'Once Upon a Time... in Hollywood',
+            'year' => 2019,
+            'genre' => 'Comedy'
+        ]);
+
+        Film::factory()->create([
+            'title' => 'Crazy Stupid Love',
+            'year' => 2011,
+            'genre' => 'RomCom'
         ]);
     }
 }

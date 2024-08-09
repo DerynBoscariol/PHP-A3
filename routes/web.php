@@ -1,5 +1,6 @@
 <?php
 use App\Models\Actor;
+use App\Http\Controllers\FilmController;
 use App\Http\Controllers\ActorController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,20 @@ Route::get(
     )->name('actors.restore');
 
 Route::resource('actors', ActorController::class);
+
+Route::get(
+    'films/trash/{id}',
+    [FilmController::class, 'trash']
+    )->name('films.trash');
+
+Route::get(
+    'films/trashed/',
+    [FilmController::class, 'trashed']
+    )->name('films.trashed');
+
+Route::get(
+    'films/restore/{id}',
+    [FilmController::class, 'trash']
+    )->name('films.restore');
+
+Route::resource('films', FilmController::class);
