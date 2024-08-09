@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <form action="{{ route('students.store') }}" method="post">
+        <form action="{{ route('actors.store') }}" method="post">
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

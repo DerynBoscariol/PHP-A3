@@ -63,6 +63,9 @@ class ActorController extends Controller
     public function update(UpdateActorRequest $request, Actor $actor)
     {
         $actor->update($request->validated());
+
+        Session::flash('success', 'Actor updated successfully!');
+        return redirect() -> route('actors.index');
     }
 
     /**
@@ -71,7 +74,7 @@ class ActorController extends Controller
     public function trash($id)
     {
         Actor::Destroy($id);
-        Session::Flash('success', 'Actor trashed successfully!');
+        Session::flash('success', 'Actor trashed successfully!');
         return redirect() -> route('actors.index');
     }
 
