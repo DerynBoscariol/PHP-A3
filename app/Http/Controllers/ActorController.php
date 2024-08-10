@@ -95,8 +95,15 @@ class ActorController extends Controller
      public function restore($id)
      {
         $actor = Actor::withTrashed() -> where('id', $id) -> first();
-        $actor ->restore();
-        Session::Flash('success', 'Actor restored successfully');
-        return redirect() -> route('actors.trashed');
+        $actor -> restore();
+        Session::flash('success', 'Actor restored successfully');
+        return redirect() -> route('actors.index');
+     }
+
+     public function trashed()
+     {
+         return view('actors.trashed', [
+             'actors' => Actor::onlyTrashed() -> get()    
+         ]);
      }
 }

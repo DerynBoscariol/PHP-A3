@@ -16,7 +16,6 @@
                         {{ $film -> title}}
                     </h5>
                     <a href="{{ route('films.restore', $film -> id) }}" class="card-link">Restore</a>
-                    <a href="{{ route('films.destroy', $film -> id)}}" class="card-link">Pernamently Delete</a>
                     <form action="{{ route('films.destroy', $film -> id)}}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE')}}

@@ -96,6 +96,13 @@ class FilmController extends Controller
         $film = Film::withTrashed() -> where('id', $id) -> first();
         $film ->restore();
         Session::Flash('success', 'Film restored successfully');
-        return redirect() -> route('films.trashed');
+        return redirect() -> route('films.index');
+     }
+
+     public function trashed()
+     {
+         return view('films.trashed', [
+             'films' => Film::onlyTrashed() -> get()    
+         ]);
      }
 }

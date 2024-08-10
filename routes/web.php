@@ -20,7 +20,7 @@ Route::get(
 
 Route::get(
     'actors/restore/{id}',
-    [ActorController::class, 'trash']
+    [ActorController::class, 'restore']
     )->name('actors.restore');
 
 Route::resource('actors', ActorController::class);
@@ -37,7 +37,7 @@ Route::get(
 
 Route::get(
     'films/restore/{id}',
-    [FilmController::class, 'trash']
+    [FilmController::class, 'restore']
     )->name('films.restore');
 
 Route::resource('films', FilmController::class);
