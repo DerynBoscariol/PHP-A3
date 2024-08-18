@@ -1,5 +1,5 @@
 # Welcome to CineBase
-CineBase is a Laravel based CMS that manages actors, films and the relationships between them. Clone this repo and run `php artisan serve` in the root folder to explore the project.
+CineBase is a Laravel based CMS that manages actors, films and the relationships between them. Clone this repo and run `php artisan serve` in the root folder to explore the project. Keep that terminal running in the background and open a new terminal. In the new terminal run `php artisan migrate:refresh --seed`
 
 ## Database Schema
 
