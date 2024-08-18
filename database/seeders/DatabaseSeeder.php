@@ -80,5 +80,7 @@ class DatabaseSeeder extends Seeder
             'year' => 2011,
             'genre' => 'RomCom'
         ]);
+
+        $this->call(ActorFilmTableSeeder::class);
     }
 }
