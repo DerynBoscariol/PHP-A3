@@ -46,6 +46,14 @@
                     </span>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label for="actor" class="form-label">Actors</label>
+                <select name="actor" id="actor">
+                    @foreach ($actors as $actor)
+                        <option value="{{ $actor -> id }}">{{ $actor->fname }} {{$actor->lname}}</option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

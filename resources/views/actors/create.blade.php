@@ -47,7 +47,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="title" class="form-label">Films</label>
+                <label for="film" class="form-label">Films</label>
                 <select name="film" id="film">
                     @foreach ($films as $film)
                         <option value="{{ $film -> id }}">{{ $film -> title }}</option>

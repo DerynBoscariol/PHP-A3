@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFilmRequest;
 use App\Http\Requests\UpdateFilmRequest;
 use App\Models\Film;
+use App\Models\Actor;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-       return view('films.create'); 
+       return view('films.create', ['actors' => Actor::all()]); 
     }
 
     /**
@@ -35,7 +36,8 @@ class FilmController extends Controller
      */
     public function store(StoreFilmRequest $request)
     {
-        Film::create($request->validated());
+        $film = Film::create($request->validated());
+        $film->actors()->attach($request->film);
 
         Session::flash('success', "Film added successfully!");
         return redirect() -> route('films.index');
@@ -44,9 +46,8 @@ class FilmController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Film $film, $id)
+    public function show(Film $film)
     {
-        $film = Film::find($id);
         $actor = $film->actors;
         return view('films.show', ['film' => $film, 'actors' => $actor] /*compact('film')*/);
     }
@@ -56,7 +57,10 @@ class FilmController extends Controller
      */
     public function edit(Film $film)
     {
-        return view('films.edit', compact('film'));
+        $allActors = Actor::all();
+        return view('films.edit', [
+            'film' => $film,
+            'allActors' => $allActors]);
     }
 
     /**
@@ -65,6 +69,7 @@ class FilmController extends Controller
     public function update(UpdateFilmRequest $request, Film $film)
     {
         $film->update($request->validated());
+        $film->actors()->sync($request->input('actors',[]));
 
         Session::flash('success', 'Film updated successfully!');
         return redirect() -> route('films.index');
