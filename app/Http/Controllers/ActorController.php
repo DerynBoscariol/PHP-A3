@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreActorRequest;
 use App\Http\Requests\UpdateActorRequest;
 use App\Models\Actor;
-
+use App\Models\Film;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -47,7 +47,7 @@ class ActorController extends Controller
      */
     public function show(Actor $actor)
     {
-        return view('actors.show', compact('actor'));
+        return view('actors.show', compact('actor'), ['films' => Film::all()]);
     }
 
     /**
@@ -55,7 +55,12 @@ class ActorController extends Controller
      */
     public function edit(Actor $actor)
     {
-        return view('actors.edit', compact('actor'));
+        $allFilms = Film::all();
+    
+        return view('actors.edit', [
+            'actor' => $actor,
+            'allFilms' => $allFilms,
+        ]);
     }
 
     /**
@@ -64,6 +69,8 @@ class ActorController extends Controller
     public function update(UpdateActorRequest $request, Actor $actor)
     {
         $actor->update($request->validated());
+
+        $actor->films()->sync($request->input('films',[]));
 
         Session::flash('success', 'Actor updated successfully!');
         return redirect() -> route('actors.index');

@@ -47,6 +47,19 @@
                     </span>
                 @enderror
             </div>
+            <div class="mb-3">
+                <h3>Add or Remove Films</h3>
+                <ul>
+                    @foreach($allFilms as $film)
+                        <li>
+                            <label>
+                                <input type="checkbox" name="films[]" value="{{ $film->id }}" 
+                                {{ $actor->films->contains($film->id) ? 'checked' : '' }}>
+                                {{ $film->title }}
+                            </label>
+                        </li>
+                    @endforeach
+                </ul>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>        
     </div>
