@@ -17,7 +17,8 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return view('films.index', [ 'films' => Film::all()
+        return view('films.index', [ 
+            'films' => Film::all()
     ]);
     }
 
@@ -26,7 +27,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-        return view('films.create');
+       return view('films.create'); 
     }
 
     /**
@@ -43,9 +44,11 @@ class FilmController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Film $film)
+    public function show(Film $film, $id)
     {
-        return view('films.show', compact('film'));
+        $film = Film::find($id);
+        $actor = $film->actors;
+        return view('films.show', ['film' => $film, 'actors' => $actor] /*compact('film')*/);
     }
 
     /**

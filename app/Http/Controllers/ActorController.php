@@ -27,7 +27,7 @@ class ActorController extends Controller
      */
     public function create()
     {
-        return view('actors.create');
+        return view('actors.create', ['films' => Film::all()]);
     }
 
     /**
@@ -35,7 +35,8 @@ class ActorController extends Controller
      */
     public function store(StoreActorRequest $request)
     {
-        Actor::create($request->validated());
+        $actor = Actor::create($request->validated());
+        $actor->films()->attach($request->film);
 
         Session::flash('success', 'Actor added successfully!');
         return redirect() -> route('actors.index');

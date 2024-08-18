@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\BelongsToMany;
+use Illuminate\Database\Eloquent\HasMany;
 
 class Actor extends Model
 {
@@ -18,4 +20,10 @@ class Actor extends Model
         'lname',
         'country',
     ];
+
+    public function films(): BelongsToMany
+    {
+        return $this->belongsToMany(Film::class);
+    }
+
 }
